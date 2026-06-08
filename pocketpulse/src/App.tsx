@@ -1,42 +1,18 @@
-import { useEffect } from "react"
+import ExpenseForm from "./components/ExpenseForm"
+import ExpenseList from "./components/ExpenseList"
 
-import { mockExpenses } from "./data/mockExpenses"
-import { useExpenseStore } from "./store/expenseStore"
-import {getTotalSpending, getTransactionCount} from "./utils/expenseCalculations"
-
-function App() {
-
-  console.log(mockExpenses)
-  
-  const expenses = useExpenseStore(
-    (state) => state.expenses
-  )
-  
-  const addExpense = useExpenseStore(
-    (state) => state.addExpense
-  )
-
-  useEffect(() => {
-    if (expenses.length === 0) {
-      mockExpenses.forEach(addExpense)
-    }
-  }, [])
-  
-  const totalSpending = getTotalSpending(expenses)
-  
-  const transactionCount = getTransactionCount(expenses)
-
+export default function App() {
   return (
-    <div>
-      <h1>PocketPulse</h1>
+    <div className="max-w-4xl mx-auto p-8">
+      <h1 className="text-4xl font-bold mb-8">
+        PocketPulse
+      </h1>
 
-      <h2>Total Spending</h2>
-      <p>€{totalSpending}</p>
+      <div className="grid gap-8">
+        <ExpenseForm />
 
-      <h2>Transaction Count</h2>
-      <p>{transactionCount}</p>
+        <ExpenseList />
+      </div>
     </div>
   )
 }
-
-export default App

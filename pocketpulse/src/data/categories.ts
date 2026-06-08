@@ -16,5 +16,8 @@ export const categories = [
     "Travel",
     "Utilities",
     "Work",
-    "Other"
-]
+    "Other",
+  ] as const
+  
+  export type Category =
+    (typeof categories)[number]
