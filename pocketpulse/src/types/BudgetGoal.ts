@@ -1,5 +1,7 @@
+import type { Category } from "../data/categories"
+
 export interface BudgetGoal {
-    id: string
-    category: string
-    monthlyLimit: number
-  }
+  id: string
+  category: Category
+  monthlyLimit: number
+}

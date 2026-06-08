@@ -10,6 +10,8 @@ import {
   getWeeklySpending,
 } from "../utils/dashboardCalculations"
 
+import ChartsSection from "./charts/ChartsSection"
+
 export default function Dashboard() {
   const expenses = useExpenseStore(
     (state) => state.expenses
@@ -31,7 +33,7 @@ export default function Dashboard() {
   
   const weekly =
     getWeeklySpending(expenses)
-
+  
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <DashboardCard
@@ -63,6 +65,11 @@ export default function Dashboard() {
         title="Weekly Spending"
         value={`€${weekly.toFixed(2)}`}
       />
-    </div>
+
+      <div className="md:col-span-3">
+        <ChartsSection expenses={expenses} />
+      </div>
+
+  </div>
   )
 }
