@@ -1,0 +1,20 @@
+export const categories = [
+    "Clothing",
+    "Dining & Treats",
+    "Education",
+    "Entertainment",
+    "Family",
+    "Financial",
+    "Gifts & Donations",
+    "Groceries",
+    "Healthcare",
+    "Housing",
+    "Insurance",
+    "Personal Care",
+    "Pets",
+    "Transportation",
+    "Travel",
+    "Utilities",
+    "Work",
+    "Other"
+]
