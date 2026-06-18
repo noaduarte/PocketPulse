@@ -14,6 +14,8 @@ interface ExpenseStore {
     id: string,
     updatedExpense: ExpenseEntry
   ) => void
+
+  reassignCategory: (fromCategory: string, toCategory: string) => void
 }
 
 export const useExpenseStore = create<ExpenseStore>()(
@@ -38,6 +40,15 @@ export const useExpenseStore = create<ExpenseStore>()(
             expenses: state.expenses.map((expense) =>
               expense.id === id
                 ? updatedExpense
+                : expense
+            ),
+          })),
+
+        reassignCategory: (fromCategory, toCategory) =>
+          set((state) => ({
+            expenses: state.expenses.map((expense) =>
+              expense.category === fromCategory
+                ? { ...expense, category: toCategory }
                 : expense
             ),
           })),

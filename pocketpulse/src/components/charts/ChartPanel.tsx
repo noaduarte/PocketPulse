@@ -16,11 +16,11 @@ export default function ChartPanel({
   return (
     <div className={`flex h-full w-full flex-col ${className}`}>
       <div className="mb-4 sm:mb-6">
-        <h2 className="text-xl font-semibold text-slate-800 sm:text-2xl lg:text-3xl">
+        <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-100 sm:text-2xl lg:text-3xl">
           {title}
         </h2>
         {description && (
-          <p className="mt-1 text-sm text-slate-500 sm:text-base lg:text-lg">
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-300 sm:text-base lg:text-lg">
             {description}
           </p>
         )}

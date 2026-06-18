@@ -8,8 +8,9 @@ import {
 } from "recharts"
 
 import type { ExpenseEntry } from "../../types/ExpenseEntry"
+import { formatCurrency } from "../../utils/formatCurrency"
 import ChartPanel from "./ChartPanel"
-import { chartLegendStyle, chartTooltipStyle } from "./chartStyles"
+import { useChartStyles } from "./useChartStyles"
 
 interface Props {
   expenses: ExpenseEntry[]
@@ -40,6 +41,7 @@ function getCategoryData(expenses: ExpenseEntry[]) {
 
 export default function CategoryPieChart({ expenses }: Props) {
   const data = getCategoryData(expenses)
+  const { tooltipStyle, legendStyle } = useChartStyles()
 
   return (
     <ChartPanel
@@ -70,18 +72,18 @@ export default function CategoryPieChart({ expenses }: Props) {
             <Tooltip
               formatter={(value) =>
                 typeof value === "number"
-                  ? `€${value.toFixed(2)}`
+                  ? formatCurrency(value)
                   : value
               }
-              contentStyle={chartTooltipStyle.contentStyle}
-              labelStyle={chartTooltipStyle.labelStyle}
-              itemStyle={chartTooltipStyle.itemStyle}
+              contentStyle={tooltipStyle.contentStyle}
+              labelStyle={tooltipStyle.labelStyle}
+              itemStyle={tooltipStyle.itemStyle}
             />
             <Legend
               layout="horizontal"
               verticalAlign="bottom"
               iconSize={16}
-              wrapperStyle={chartLegendStyle}
+              wrapperStyle={legendStyle}
             />
           </PieChart>
         </ResponsiveContainer>

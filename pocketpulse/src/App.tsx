@@ -5,6 +5,7 @@ import AddExpensePage from "./pages/AddExpensePage"
 import BudgetPage from "./pages/BudgetPage"
 import HomePage from "./pages/HomePage"
 import InsightsPage from "./pages/InsightsPage"
+import SettingsPage from "./pages/SettingsPage"
 import YourExpensesPage from "./pages/YourExpensesPage"
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="your-expenses" element={<YourExpensesPage />} />
         <Route path="budget" element={<BudgetPage />} />
         <Route path="insights" element={<InsightsPage />} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
     </Routes>
   )

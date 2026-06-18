@@ -1,4 +1,4 @@
-import type { Category } from "./Category"
+import type { Category } from "../data/categories"
 import type { PaymentMethod } from "./PaymentMethod"
 
 export interface ExpenseEntry {

@@ -9,15 +9,13 @@ import {
   getTransactionCount,
   getWeeklySpending,
 } from "../utils/dashboardCalculations"
+import { useFormatCurrency } from "../utils/formatCurrency"
 
 import ChartsSection from "./charts/ChartsSection"
 
-function formatEuro(amount: number) {
-  return `€${amount.toFixed(2)}`
-}
-
 export default function Dashboard() {
   const expenses = useExpenseStore((state) => state.expenses)
+  const formatMoney = useFormatCurrency()
 
   const total = getTotalSpending(expenses)
   const transactions = getTransactionCount(expenses)
@@ -35,7 +33,7 @@ export default function Dashboard() {
           <DashboardCard
             variant="hero"
             title="Total Spending"
-            value={formatEuro(total)}
+            value={formatMoney(total)}
             subtitle={
               hasData
                 ? `${transactions} transaction${transactions !== 1 ? "s" : ""} recorded`
@@ -47,17 +45,17 @@ export default function Dashboard() {
         <div className="grid grid-cols-2 gap-4 lg:col-span-6 lg:grid-cols-2 lg:gap-6 lg:content-stretch">
           <DashboardCard
             title="This Month"
-            value={formatEuro(monthly)}
+            value={formatMoney(monthly)}
             accent="violet"
           />
           <DashboardCard
             title="Last 7 Days"
-            value={formatEuro(weekly)}
+            value={formatMoney(weekly)}
             accent="green"
           />
           <DashboardCard
             title="Average Expense"
-            value={formatEuro(average)}
+            value={formatMoney(average)}
             accent="amber"
           />
           <DashboardCard

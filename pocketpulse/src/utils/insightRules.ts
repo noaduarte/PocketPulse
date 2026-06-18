@@ -4,6 +4,7 @@ import type { Category } from "../data/categories"
 import type { BudgetGoal } from "../types/BudgetGoal"
 import type { ExpenseEntry } from "../types/ExpenseEntry"
 import { getAllBudgetStatuses } from "./budgetCalculations"
+import { formatCurrency } from "./formatCurrency"
 
 export type InsightSeverity = "info" | "warning" | "success" | "alert"
 
@@ -110,7 +111,7 @@ function getTopCategoryEntry(expenses: ExpenseEntry[]) {
 }
 
 function formatEuro(amount: number) {
-  return `€${amount.toFixed(2)}`
+  return formatCurrency(amount)
 }
 
 function pushInsight(

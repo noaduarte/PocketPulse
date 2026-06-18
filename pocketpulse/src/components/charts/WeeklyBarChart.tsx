@@ -10,8 +10,9 @@ import {
 import dayjs from "dayjs"
 
 import type { ExpenseEntry } from "../../types/ExpenseEntry"
+import { formatCurrency } from "../../utils/formatCurrency"
 import ChartPanel from "./ChartPanel"
-import { chartTickStyle, chartTooltipStyle } from "./chartStyles"
+import { chartMargin, useChartStyles } from "./useChartStyles"
 
 interface Props {
   expenses: ExpenseEntry[]
@@ -35,6 +36,14 @@ function getWeeklyData(expenses: ExpenseEntry[]) {
 
 export default function WeeklyBarChart({ expenses }: Props) {
   const data = getWeeklyData(expenses)
+  const {
+    tickStyle,
+    gridStroke,
+    axisStroke,
+    tooltipStyle,
+    yAxisWidth,
+    yAxisTickFormatter,
+  } = useChartStyles()
 
   return (
     <ChartPanel
@@ -43,38 +52,36 @@ export default function WeeklyBarChart({ expenses }: Props) {
     >
       <div className="h-[280px] w-full min-w-0 sm:h-[340px] lg:h-[400px] xl:h-[440px]">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            data={data}
-            margin={{ top: 12, right: 16, left: 4, bottom: 8 }}
-          >
+          <BarChart data={data} margin={chartMargin}>
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="#e2e8f0"
+              stroke={gridStroke}
               vertical={false}
             />
             <XAxis
               dataKey="day"
-              tick={chartTickStyle}
+              tick={tickStyle}
               tickLine={false}
-              axisLine={{ stroke: "#e2e8f0" }}
+              axisLine={{ stroke: axisStroke }}
               dy={8}
             />
             <YAxis
-              tick={chartTickStyle}
+              tick={tickStyle}
               tickLine={false}
               axisLine={false}
-              tickFormatter={(v) => `€${v}`}
-              width={72}
+              tickFormatter={yAxisTickFormatter}
+              width={yAxisWidth}
+              tickMargin={4}
             />
             <Tooltip
               formatter={(value) =>
                 typeof value === "number"
-                  ? [`€${value.toFixed(2)}`, "Spent"]
+                  ? [formatCurrency(value), "Spent"]
                   : [value, "Spent"]
               }
-              contentStyle={chartTooltipStyle.contentStyle}
-              labelStyle={chartTooltipStyle.labelStyle}
-              itemStyle={chartTooltipStyle.itemStyle}
+              contentStyle={tooltipStyle.contentStyle}
+              labelStyle={tooltipStyle.labelStyle}
+              itemStyle={tooltipStyle.itemStyle}
             />
             <Bar
               dataKey="value"

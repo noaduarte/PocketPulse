@@ -11,14 +11,14 @@ interface Props {
 export default function ChartsSection({ expenses }: Props) {
   if (expenses.length === 0) {
     return (
-      <div className="flex w-full flex-col items-center justify-center rounded-3xl bg-white py-20 px-8 text-center shadow-sm">
-        <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-indigo-50">
+      <div className="flex w-full flex-col items-center justify-center rounded-3xl bg-white py-20 px-8 text-center shadow-sm dark:bg-slate-800">
+        <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-indigo-50 dark:bg-indigo-900/40">
           <span className="text-3xl font-bold text-indigo-400">—</span>
         </div>
-        <p className="text-xl font-medium text-slate-700 sm:text-2xl">
+        <p className="text-xl font-medium text-slate-700 dark:text-slate-100 sm:text-2xl">
           No chart data yet
         </p>
-        <p className="mt-2 text-base text-slate-500 sm:text-lg">
+        <p className="mt-2 text-base text-slate-500 dark:text-slate-300 sm:text-lg">
           Add expenses from the Add Expense tab to unlock spending
           trends and category breakdowns.
         </p>

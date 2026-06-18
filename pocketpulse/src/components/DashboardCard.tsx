@@ -51,7 +51,9 @@ export default function DashboardCard({
         <p className="text-xs font-medium uppercase tracking-wide opacity-70">
           {title}
         </p>
-        <p className="mt-0.5 text-lg font-bold text-slate-900">{value}</p>
+        <p className="mt-0.5 text-lg font-bold text-slate-900 dark:text-white">
+          {value}
+        </p>
       </div>
     )
   }
@@ -60,14 +62,16 @@ export default function DashboardCard({
     <div
       className={`flex h-full min-h-[120px] flex-col justify-center rounded-3xl bg-gradient-to-br p-6 sm:min-h-[140px] sm:p-8 lg:min-h-[150px] ${accentStyles[accent]}`}
     >
-      <p className="text-base font-medium opacity-80 sm:text-lg">
+      <p className="text-base font-medium opacity-80 dark:text-slate-300 sm:text-lg">
         {title}
       </p>
-      <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+      <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl">
         {value}
       </p>
       {subtitle && (
-        <p className="mt-1 text-sm opacity-60">{subtitle}</p>
+        <p className="mt-1 text-sm opacity-60 dark:text-slate-400">
+          {subtitle}
+        </p>
       )}
     </div>
   )

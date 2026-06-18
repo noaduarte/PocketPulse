@@ -8,6 +8,7 @@ interface BudgetStore {
 
   addGoal: (goal: BudgetGoal) => void
   deleteGoal: (id: string) => void
+  deleteGoalsByCategory: (category: string) => void
 }
 
 export const useBudgetStore = create<BudgetStore>()(
@@ -33,6 +34,13 @@ export const useBudgetStore = create<BudgetStore>()(
       deleteGoal: (id) =>
         set((state) => ({
           goals: state.goals.filter((goal) => goal.id !== id),
+        })),
+
+      deleteGoalsByCategory: (category) =>
+        set((state) => ({
+          goals: state.goals.filter(
+            (goal) => goal.category !== category
+          ),
         })),
     }),
     {

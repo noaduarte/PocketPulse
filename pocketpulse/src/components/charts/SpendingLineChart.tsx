@@ -10,8 +10,9 @@ import {
 import dayjs from "dayjs"
 
 import type { ExpenseEntry } from "../../types/ExpenseEntry"
+import { formatCurrency } from "../../utils/formatCurrency"
 import ChartPanel from "./ChartPanel"
-import { chartTickStyle, chartTooltipStyle } from "./chartStyles"
+import { chartMargin, useChartStyles } from "./useChartStyles"
 
 interface Props {
   expenses: ExpenseEntry[]
@@ -36,6 +37,14 @@ function getDailyData(expenses: ExpenseEntry[]) {
 
 export default function SpendingLineChart({ expenses }: Props) {
   const data = getDailyData(expenses)
+  const {
+    tickStyle,
+    gridStroke,
+    axisStroke,
+    tooltipStyle,
+    yAxisWidth,
+    yAxisTickFormatter,
+  } = useChartStyles()
 
   return (
     <ChartPanel
@@ -44,34 +53,32 @@ export default function SpendingLineChart({ expenses }: Props) {
     >
       <div className="h-[300px] w-full min-w-0 sm:h-[360px] lg:h-[420px] xl:h-[480px]">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart
-            data={data}
-            margin={{ top: 12, right: 16, left: 4, bottom: 8 }}
-          >
+          <LineChart data={data} margin={chartMargin}>
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="#e2e8f0"
+              stroke={gridStroke}
               vertical={false}
             />
             <XAxis
               dataKey="label"
-              tick={chartTickStyle}
+              tick={tickStyle}
               tickLine={false}
-              axisLine={{ stroke: "#e2e8f0" }}
+              axisLine={{ stroke: axisStroke }}
               interval="preserveStartEnd"
               dy={8}
             />
             <YAxis
-              tick={chartTickStyle}
+              tick={tickStyle}
               tickLine={false}
               axisLine={false}
-              tickFormatter={(v) => `€${v}`}
-              width={72}
+              tickFormatter={yAxisTickFormatter}
+              width={yAxisWidth}
+              tickMargin={4}
             />
             <Tooltip
               formatter={(value) =>
                 typeof value === "number"
-                  ? [`€${value.toFixed(2)}`, "Spent"]
+                  ? [formatCurrency(value), "Spent"]
                   : [value, "Spent"]
               }
               labelFormatter={(_, payload) =>
@@ -79,9 +86,9 @@ export default function SpendingLineChart({ expenses }: Props) {
                   ? dayjs(payload[0].payload.date).format("MMM D, YYYY")
                   : ""
               }
-              contentStyle={chartTooltipStyle.contentStyle}
-              labelStyle={chartTooltipStyle.labelStyle}
-              itemStyle={chartTooltipStyle.itemStyle}
+              contentStyle={tooltipStyle.contentStyle}
+              labelStyle={tooltipStyle.labelStyle}
+              itemStyle={tooltipStyle.itemStyle}
             />
             <Line
               type="monotone"
